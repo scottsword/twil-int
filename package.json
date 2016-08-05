@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.4.1",
     "hapi": "^14.1.0",
     "q": "^1.4.1",
     "twilio": "^2.9.1"
