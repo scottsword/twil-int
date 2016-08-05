@@ -16,7 +16,7 @@ tsAPI.getStatus = function() {
 		console.log("Promise resolved.");
 		dfd.resolve("hell yeah buddy");
 
-	}, 10000);
+	}, 5000);
 
 	return dfd.promise;
 
@@ -35,7 +35,9 @@ server.route({
  //  }
    handler: function(req, reply) {
 
-   	reply(tsAPI.getStatus()
+   	const _reply = reply().hold();
+
+   	_reply(tsAPI.getStatus()
    			.then(function(status) {
    				console.log("Then fired with ", status);
    				const resp = new twilio.TwimlResponse();
