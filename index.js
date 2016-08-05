@@ -10,22 +10,22 @@ const tsAPI = {};
 
 tsAPI.getStatus = function() {
 
-	// const dfd = q.defer();
+	const dfd = q.defer();
 
-	// setTimeout(function() {
+	setTimeout(function() {
 
-	// 	console.log("Promise resolved.");
-	// 	dfd.resolve("hell yeah buddy");
+		console.log("Promise resolved.");
+		dfd.resolve("hell yeah buddy");
 
-	// }, 5000);
+	}, 5000);
 
-	// return dfd.promise;
+	return dfd.promise;
 
-	return new Bluebird.Promise(function(resolve, reject) {
-		setTimeout(function() {
-			resolve("boom");
-		}, 5000);
-	});
+	// return new Bluebird.Promise(function(resolve, reject) {
+	// 	setTimeout(function() {
+	// 		resolve("boom");
+	// 	}, 5000);
+	// });
 
 };
 
@@ -44,12 +44,14 @@ server.route({
 
    	const resp = new twilio.TwimlResponse();
 
-   	reply(tsAPI.getStatus()
-   			.then(function(status) {
-   				console.log("Then fired with ", status);
-    			resp.message(status);
-    			return status.toString().type('text/xml');
-   			}));
+   	// reply(tsAPI.getStatus()
+   	// 		.then(function(status) {
+   	// 			console.log("Then fired with ", status);
+    // 			resp.message(status);
+    // 			status.toString().type('text/xml');
+   	// 		}));
+
+	reply(tsAPI.getStatus());
 
   }
 });
