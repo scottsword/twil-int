@@ -4,21 +4,28 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 const twilio = require('twilio');
 const q = require('q');
+const Bluebird = require('bluebird');
 
 const tsAPI = {};
 
 tsAPI.getStatus = function() {
 
-	const dfd = q.defer();
+	// const dfd = q.defer();
 
-	setTimeout(function() {
+	// setTimeout(function() {
 
-		console.log("Promise resolved.");
-		dfd.resolve("hell yeah buddy");
+	// 	console.log("Promise resolved.");
+	// 	dfd.resolve("hell yeah buddy");
 
-	}, 5000);
+	// }, 5000);
 
-	return dfd.promise;
+	// return dfd.promise;
+
+	return new Bluebird.Promise(function(resolve, reject) {
+		setTimeout(function() {
+			resolve("boom");
+		}. 5000);
+	});
 
 };
 
@@ -35,9 +42,7 @@ server.route({
  //  }
    handler: function(req, reply) {
 
-   	const _reply = reply().hold();
-
-   	_reply(tsAPI.getStatus()
+   	reply(tsAPI.getStatus()
    			.then(function(status) {
    				console.log("Then fired with ", status);
    				const resp = new twilio.TwimlResponse();
