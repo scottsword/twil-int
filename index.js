@@ -11,7 +11,8 @@ server.route({
   path: '/yo',
   handler: function(req, rsp) {
     const resp = new twilio.TwimlResponse();
-    resp.message("OMG bro");
+    resp.message(dispatcher(req.query.Body));
+	console.log("Request is ", req.query.Body);
     rsp(resp.toString()).type('text/xml');
   }
 });
@@ -22,3 +23,16 @@ server.start((err) => {
 	}
 	console.log(`Server running at: ${server.info.uri}`);
 });
+
+function dispatcher(req) {
+	const _req = req.toLowerCase();
+	if (_req === 'status') {
+		return "You've been clocked in for XHRSXXMINS";
+	} else if (_req === "clockout" || _req === "clock out") {
+		return "Successfully clocked out.";
+	} else if (_req === "clockin" || _req === "clock in") {
+		return "Clocked in!";
+	} else {
+		return "I'm sorry I don't know that one.";
+	}
+}
