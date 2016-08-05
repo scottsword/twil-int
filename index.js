@@ -14,8 +14,11 @@ tsAPI.getStatus = function() {
 
 	setTimeout(function() {
 
+		const resp = new twilio.TwimlResponse();
+		resp.message("hell yeah buddy");
+
 		console.log("Promise resolved.");
-		dfd.resolve("hell yeah buddy");
+		dfd.resolve(resp.toString());
 
 	}, 5000);
 
@@ -51,7 +54,7 @@ server.route({
     // 			status.toString().type('text/xml');
    	// 		}));
 
-	reply(tsAPI.getStatus());
+	reply(tsAPI.getStatus()).type('text/xml');
 
   }
 });
