@@ -9,12 +9,14 @@ const tsAPI = {};
 
 tsAPI.getStatus = function(req) {
 
+	if (!req) return false;
+
 	const dfd = q.defer();
 
 	setTimeout(function() {
 
 		const resp = new twilio.TwimlResponse();
-		resp.message(dispatcher(req.query.Body));
+		resp.message(dispatcher(req));
 		dfd.resolve(resp.toString());
 
 	}, 5000);
@@ -47,10 +49,6 @@ server.start((err) => {
 function dispatcher(req) {
 	const _req = req.toLowerCase();
 	if (_req === 'status') {
-
-		tsAPI.getStatus()
-			.then();
-
 		return "You've been clocked in for XHRSXXMINS";
 	} else if (_req === "clockout" || _req === "clock out") {
 		return "Successfully clocked out.";
