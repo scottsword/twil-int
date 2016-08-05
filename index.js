@@ -35,11 +35,13 @@ server.route({
  //  }
    handler: function(req, rsp) {
 
-    tsAPI.getStatus()
+   	const _rsp = rsp().hold();
+
+    return tsAPI.getStatus()
     	.then(function(status) {
     			const resp = new twilio.TwimlResponse();
     			resp.message(status);
-    			rsp(status.toString()).type('text/xml');
+    			return _rsp(status.toString()).type('text/xml');
     	});
 
   }
