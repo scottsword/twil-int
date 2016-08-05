@@ -33,16 +33,15 @@ server.route({
 	// console.log("Request is ", req.query.Body);
  //    rsp(resp.toString()).type('text/xml');
  //  }
-   handler: function(req, rsp) {
+   handler: function(req, reply) {
 
-   	const _rsp = rsp().hold();
-
-    return tsAPI.getStatus()
-    	.then(function(status) {
-    			const resp = new twilio.TwimlResponse();
+   	reply(tsAPI.getStatus()
+   			.then(function(status) {
+   				console.log("Then fired with ", status);
+   				const resp = new twilio.TwimlResponse();
     			resp.message(status);
     			return _rsp(status.toString()).type('text/xml');
-    	});
+   			}));
 
   }
 });
@@ -69,4 +68,4 @@ server.start((err) => {
 // 	} else {
 // 		return "I'm sorry I don't know that one.";
 // 	}
-// }
+// }    return tsAPI.getStatus()
