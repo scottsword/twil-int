@@ -38,9 +38,9 @@ server.route({
     tsAPI.getStatus()
     	.then(function(status) {
     			const resp = new twilio.TwimlResponse();
-    			resp.message(dispatcher(status));
+    			resp.message(status);
     			rsp(status.toString()).type('text/xml');
-    	};
+    	});
 
   }
 });
