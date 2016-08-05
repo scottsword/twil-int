@@ -40,7 +40,8 @@ server.route({
    				console.log("Then fired with ", status);
    				const resp = new twilio.TwimlResponse();
     			resp.message(status);
-    			return _rsp(status.toString()).type('text/xml');
+    			// return _rsp(status.toString()).type('text/xml');
+    			return status.toString().type('text/xml');
    			}));
 
   }
