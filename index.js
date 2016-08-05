@@ -24,7 +24,7 @@ tsAPI.getStatus = function() {
 	return new Bluebird.Promise(function(resolve, reject) {
 		setTimeout(function() {
 			resolve("boom");
-		}. 5000);
+		}, 5000);
 	});
 
 };
@@ -42,12 +42,12 @@ server.route({
  //  }
    handler: function(req, reply) {
 
+   	const resp = new twilio.TwimlResponse();
+
    	reply(tsAPI.getStatus()
    			.then(function(status) {
    				console.log("Then fired with ", status);
-   				const resp = new twilio.TwimlResponse();
     			resp.message(status);
-    			// return _rsp(status.toString()).type('text/xml');
     			return status.toString().type('text/xml');
    			}));
 
